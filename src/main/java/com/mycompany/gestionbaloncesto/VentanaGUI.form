@@ -28,7 +28,7 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="panelPestanyaPrincipal" alignment="0" pref="513" max="32767" attributes="0"/>
+          <Component id="panelPestanyaPrincipal" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -263,8 +263,8 @@
                                   </Group>
                                   <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="campoEquiposNombre" max="32767" attributes="0"/>
-                                      <Component id="campoEquiposCiudad" max="32767" attributes="0"/>
+                                      <Component id="equiposNombre" max="32767" attributes="0"/>
+                                      <Component id="equiposCiudad" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
@@ -274,14 +274,14 @@
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="comboEquiposConferencia" max="32767" attributes="0"/>
-                                      <Component id="comboEquiposDivision" max="32767" attributes="0"/>
+                                      <Component id="equiposConferencia" max="32767" attributes="0"/>
+                                      <Component id="equiposDivisionCombo" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
-                      <Component id="panelEquiposAceptarCancelar" max="32767" attributes="0"/>
+                      <Component id="panelEquiposDerecho" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
@@ -290,25 +290,25 @@
                           <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="etiquetaEquiposNombre" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="campoEquiposNombre" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="equiposNombre" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="etiquetaEquiposCiudad" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="campoEquiposCiudad" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="equiposCiudad" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="etiquetaEquiposConferencia" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="comboEquiposConferencia" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="equiposConferencia" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="etiquetaEquiposDivision" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="comboEquiposDivision" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="equiposDivisionCombo" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace pref="39" max="32767" attributes="0"/>
-                          <Component id="panelEquiposAceptarCancelar" min="-2" max="-2" attributes="0"/>
+                          <Component id="panelEquiposDerecho" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -319,7 +319,7 @@
                     <Property name="text" type="java.lang.String" value="Nombre: "/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="campoEquiposNombre">
+                <Component class="javax.swing.JTextField" name="equiposNombre">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="jTextField1"/>
                   </Properties>
@@ -329,7 +329,7 @@
                     <Property name="text" type="java.lang.String" value="Ciudad:"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="campoEquiposCiudad">
+                <Component class="javax.swing.JTextField" name="equiposCiudad">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="jTextField1"/>
                   </Properties>
@@ -339,7 +339,7 @@
                     <Property name="text" type="java.lang.String" value="Conferencia: "/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JComboBox" name="comboEquiposConferencia">
+                <Component class="javax.swing.JComboBox" name="equiposConferencia">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="2">
@@ -349,7 +349,7 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="comboEquiposConferenciaItemStateChanged"/>
+                    <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="equiposConferenciaItemStateChanged"/>
                   </Events>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
@@ -360,7 +360,7 @@
                     <Property name="text" type="java.lang.String" value="Divisi&#xf3;n:"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JComboBox" name="comboEquiposDivision">
+                <Component class="javax.swing.JComboBox" name="equiposDivisionCombo">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="3">
@@ -374,7 +374,7 @@
                     <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                   </AuxValues>
                 </Component>
-                <Container class="javax.swing.JPanel" name="panelEquiposAceptarCancelar">
+                <Container class="javax.swing.JPanel" name="panelEquiposDerecho">
 
                   <Layout>
                     <DimensionLayout dim="0">
