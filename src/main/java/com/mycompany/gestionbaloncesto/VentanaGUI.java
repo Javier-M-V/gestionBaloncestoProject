@@ -5,6 +5,7 @@
  */
 package com.mycompany.gestionbaloncesto;
 
+import java.awt.event.ComponentEvent;
 import java.util.Iterator;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -93,7 +94,7 @@ public class VentanaGUI extends javax.swing.JFrame {
             .addGroup(pestanaMenuPrincipalLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jButton1)
-                .addContainerGap(1195, Short.MAX_VALUE))
+                .addContainerGap(734, Short.MAX_VALUE))
         );
         pestanaMenuPrincipalLayout.setVerticalGroup(
             pestanaMenuPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -131,32 +132,37 @@ public class VentanaGUI extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tablaEquiposListadoEquipos);
 
-        botonEquipoInsertar.setText("Consultar");
+        botonEquipoInsertar.setText("Insertar");
         botonEquipoInsertar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonEquipoInsertarActionPerformed(evt);
             }
         });
 
-        botonEquipoModificar.setText("Insertar");
+        botonEquipoModificar.setText("Modificar");
 
         botonEquipoEliminar.setText("Eliminar");
+        botonEquipoEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonEquipoEliminarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelEquiposListadoLayout = new javax.swing.GroupLayout(panelEquiposListado);
         panelEquiposListado.setLayout(panelEquiposListadoLayout);
         panelEquiposListadoLayout.setHorizontalGroup(
             panelEquiposListadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelEquiposListadoLayout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 418, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(panelEquiposListadoLayout.createSequentialGroup()
-                .addGap(67, 67, 67)
-                .addComponent(botonEquipoInsertar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(55, 55, 55)
                 .addComponent(botonEquipoModificar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
+                .addComponent(botonEquipoInsertar)
+                .addGap(18, 18, 18)
                 .addComponent(botonEquipoEliminar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(97, Short.MAX_VALUE))
         );
         panelEquiposListadoLayout.setVerticalGroup(
             panelEquiposListadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -214,17 +220,18 @@ public class VentanaGUI extends javax.swing.JFrame {
             .addGroup(panelEquiposDerechoLayout.createSequentialGroup()
                 .addGap(122, 122, 122)
                 .addComponent(botonEquiposAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(botonEquiposCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(100, Short.MAX_VALUE))
         );
         panelEquiposDerechoLayout.setVerticalGroup(
             panelEquiposDerechoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelEquiposDerechoLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(panelEquiposDerechoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(botonEquiposCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(botonEquiposAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 39, Short.MAX_VALUE))
+                    .addComponent(botonEquiposAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botonEquiposCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout panelEquiposInformacionLayout = new javax.swing.GroupLayout(panelEquiposInformacion);
@@ -279,7 +286,7 @@ public class VentanaGUI extends javax.swing.JFrame {
         panelEquiposBotones.setLayout(panelEquiposBotonesLayout);
         panelEquiposBotonesLayout.setHorizontalGroup(
             panelEquiposBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1285, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         panelEquiposBotonesLayout.setVerticalGroup(
             panelEquiposBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -413,7 +420,7 @@ public class VentanaGUI extends javax.swing.JFrame {
                         .addComponent(jButton5)
                         .addGap(18, 18, 18)
                         .addComponent(jButton6)
-                        .addGap(0, 476, Short.MAX_VALUE))
+                        .addGap(0, 15, Short.MAX_VALUE))
                     .addGroup(DerechoLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(DerechoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -517,23 +524,34 @@ public class VentanaGUI extends javax.swing.JFrame {
     private void botonEquiposAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEquiposAceptarActionPerformed
         
         Equipos equipo = null;
-        switch (insertarModificarEliminar)
+        Transaction transaccion = null;
+        switch (opcion)
         {
-            case 1: 
+            case 1: //insertar
                 equipo = new Equipos(equiposNombre.getText(), equiposCiudad.getText(), equiposConferencia.getSelectedItem().toString(), equiposDivisionCombo.getSelectedItem().toString(), null, null, null);
-                Transaction tx = sesionCreada.beginTransaction();
-                sesionCreada.save(equipo);
-                tx.commit();
+                transaccion = sesionCreada.beginTransaction();
+                sesionCreada.save(equipo);//update para modifica  //delete pa borrar
+                transaccion.commit();
+                pestanaEquiposComponentShown(new ComponentEvent(this, 0));
+                break;
+               
+            case 2:
+                equipo = (Equipos)sesionCreada.load(Equipos.class, (String)equiposNombre.getText());
+                transaccion = sesionCreada.beginTransaction();
+                sesionCreada.delete(equipo);//update para modifica  //delete pa borrar
+                transaccion.commit();
+                pestanaEquiposComponentShown(new ComponentEvent(this, 0));
                 break;
         }
     }//GEN-LAST:event_botonEquiposAceptarActionPerformed
 
     private void botonEquiposCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEquiposCancelarActionPerformed
-        // TODO add your handling code here:
+        pestanaEquiposComponentShown(new ComponentEvent(this, 0));
+        desactivarCamposEquipos();
     }//GEN-LAST:event_botonEquiposCancelarActionPerformed
 
     private void botonEquipoInsertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEquipoInsertarActionPerformed
-        insertarModificarEliminar=1;
+        opcion=1;
         activarCamposEquipos();
     }//GEN-LAST:event_botonEquipoInsertarActionPerformed
 
@@ -556,8 +574,8 @@ public class VentanaGUI extends javax.swing.JFrame {
         
         Query q = sesionCreada.createQuery("from Equipos as e where e.nombre = :nombreEquipo");
         DefaultTableModel modeloTabla = (DefaultTableModel) tablaEquiposListadoEquipos.getModel();
-        int filaQueElUsuarioAPresionado = tablaEquiposListadoEquipos.getSelectedRow();
-        String nombreEquipo = (String) modeloTabla.getValueAt(filaQueElUsuarioAPresionado,0);
+        int filaSeleccionada = tablaEquiposListadoEquipos.getSelectedRow();
+        String nombreEquipo = (String) modeloTabla.getValueAt(filaSeleccionada,0);
         q.setParameter("nombreEquipo", nombreEquipo);
         Equipos equipo = (Equipos) q.uniqueResult();
         equiposNombre.setText(equipo.getNombre());
@@ -616,6 +634,10 @@ public class VentanaGUI extends javax.swing.JFrame {
         }
         jTableJugadores.setModel(modeloTabla);
     }//GEN-LAST:event_jPanelJugadoresComponentShown
+
+    private void botonEquipoEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEquipoEliminarActionPerformed
+        opcion = 2;
+    }//GEN-LAST:event_botonEquipoEliminarActionPerformed
 
     public static void main(String args[]) {
         try {
@@ -696,7 +718,7 @@ public class VentanaGUI extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
     private SessionFactory sesionFactoria = null;
     private Session sesionCreada = null;
-    private int insertarModificarEliminar=0;
+    private int opcion = 0;
     private String[] divisionEste = {"Atlantico","Sureste","Central"};
     private String[] divisionOeste = {"NoroEste","Suroeste","Pacifico"};
     
@@ -705,7 +727,7 @@ public class VentanaGUI extends javax.swing.JFrame {
         equiposCiudad.setEnabled(true);
         equiposNombre.setEnabled(true);
         equiposConferencia.setEnabled(true);
-        equiposDivisionCombo.setEnabled(false);
+        equiposDivisionCombo.setEnabled(true);
         panelEquiposDerecho.setVisible(true);
         equiposCiudad.setEditable(false);
         equiposNombre.setEditable(false);
