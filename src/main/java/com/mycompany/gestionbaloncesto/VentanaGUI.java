@@ -8,6 +8,7 @@ package com.mycompany.gestionbaloncesto;
 import java.awt.event.ComponentEvent;
 import java.util.Iterator;
 import java.util.List;
+import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 import org.hibernate.Query;
@@ -62,21 +63,21 @@ public class VentanaGUI extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         Derecho = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jTextFieldID = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        jTextFieldNombre = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        jTextFieldUniversidad = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jSpinner1 = new javax.swing.JSpinner();
-        jSpinner2 = new javax.swing.JSpinner();
+        jSpinnerAltura = new javax.swing.JSpinner();
+        jSpinnerPeso = new javax.swing.JSpinner();
         jLabel11 = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBoxPosicion = new javax.swing.JComboBox<>();
         jLabel12 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        jComboBoxEquipo = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -140,6 +141,11 @@ public class VentanaGUI extends javax.swing.JFrame {
         });
 
         botonEquipoModificar.setText("Modificar");
+        botonEquipoModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonEquipoModificarActionPerformed(evt);
+            }
+        });
 
         botonEquipoEliminar.setText("Eliminar");
         botonEquipoEliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -341,6 +347,11 @@ public class VentanaGUI extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4", "Title 5"
             }
         ));
+        jTableJugadores.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableJugadoresMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTableJugadores);
 
         jButton2.setText("Insertar");
@@ -383,15 +394,15 @@ public class VentanaGUI extends javax.swing.JFrame {
 
         jLabel6.setText("id");
 
-        jTextField1.setText("jTextField1");
+        jTextFieldID.setText("jTextField1");
 
         jLabel7.setText("Nombre");
 
-        jTextField2.setText("jTextField2");
+        jTextFieldNombre.setText("jTextField2");
 
         jLabel8.setText("Universidad");
 
-        jTextField3.setText("jTextField3");
+        jTextFieldUniversidad.setText("jTextField3");
 
         jLabel9.setText("Altura(pies)");
 
@@ -403,11 +414,9 @@ public class VentanaGUI extends javax.swing.JFrame {
 
         jButton6.setText("Cancelar");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxPosicion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Base", "Escolta", "Alero", "Ala", "Pivot", " " }));
 
         jLabel12.setText("Equipo");
-
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout DerechoLayout = new javax.swing.GroupLayout(Derecho);
         Derecho.setLayout(DerechoLayout);
@@ -433,13 +442,13 @@ public class VentanaGUI extends javax.swing.JFrame {
                             .addComponent(jLabel12))
                         .addGap(23, 23, 23)
                         .addGroup(DerechoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextField1)
-                            .addComponent(jTextField2)
-                            .addComponent(jTextField3)
-                            .addComponent(jSpinner1)
-                            .addComponent(jSpinner2)
-                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(jComboBoxEquipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jTextFieldID)
+                            .addComponent(jTextFieldNombre)
+                            .addComponent(jTextFieldUniversidad)
+                            .addComponent(jSpinnerAltura)
+                            .addComponent(jSpinnerPeso)
+                            .addComponent(jComboBoxPosicion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         DerechoLayout.setVerticalGroup(
@@ -447,32 +456,32 @@ public class VentanaGUI extends javax.swing.JFrame {
             .addGroup(DerechoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(DerechoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
                 .addGap(18, 18, 18)
                 .addGroup(DerechoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(DerechoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldUniversidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(DerechoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jSpinnerAltura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(16, 16, 16)
                 .addGroup(DerechoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jSpinnerPeso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(DerechoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBoxPosicion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(DerechoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBoxEquipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(41, 41, 41)
                 .addGroup(DerechoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton5)
@@ -528,19 +537,39 @@ public class VentanaGUI extends javax.swing.JFrame {
         switch (opcion)
         {
             case 1: //insertar
+                tablaEquiposListadoEquipos.clearSelection();
+                tablaEquiposListadoEquipos.setEnabled(false);
                 equipo = new Equipos(equiposNombre.getText(), equiposCiudad.getText(), equiposConferencia.getSelectedItem().toString(), equiposDivisionCombo.getSelectedItem().toString(), null, null, null);
                 transaccion = sesionCreada.beginTransaction();
-                sesionCreada.save(equipo);//update para modifica  //delete pa borrar
+                sesionCreada.save(equipo);//save para nuevo
                 transaccion.commit();
-                pestanaEquiposComponentShown(new ComponentEvent(this, 0));
+                pestanaEquiposComponentShown(new ComponentEvent(this, 0));//resfresco la pestaña
+                habilitarbotonesequipos();
+                
                 break;
                
-            case 2:
+            case 2://borrar
                 equipo = (Equipos)sesionCreada.load(Equipos.class, (String)equiposNombre.getText());
                 transaccion = sesionCreada.beginTransaction();
                 sesionCreada.delete(equipo);//update para modifica  //delete pa borrar
                 transaccion.commit();
                 pestanaEquiposComponentShown(new ComponentEvent(this, 0));
+                habilitarbotonesequipos();
+                break;
+                
+            case 3://Modificar
+        
+                equipo = (Equipos)sesionCreada.load(Equipos.class, (String)equiposNombre.getText());
+                transaccion = sesionCreada.beginTransaction();
+                
+                equipo.setNombre(equiposNombre.getText());
+                equipo.setCiudad(equiposCiudad.getText());
+                equipo.setConferencia(equiposConferencia.getSelectedItem().toString());
+                equipo.setDivision(equiposDivisionCombo.getSelectedItem().toString());
+                sesionCreada.update(equipo);//update para modificar
+                transaccion.commit();
+                pestanaEquiposComponentShown(new ComponentEvent(this, 0));
+                habilitarbotonesequipos();
                 break;
         }
     }//GEN-LAST:event_botonEquiposAceptarActionPerformed
@@ -548,10 +577,13 @@ public class VentanaGUI extends javax.swing.JFrame {
     private void botonEquiposCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEquiposCancelarActionPerformed
         pestanaEquiposComponentShown(new ComponentEvent(this, 0));
         desactivarCamposEquipos();
+        habilitarbotonesequipos();
     }//GEN-LAST:event_botonEquiposCancelarActionPerformed
 
     private void botonEquipoInsertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEquipoInsertarActionPerformed
         opcion=1;
+        botonEquipoEliminar.setEnabled(false);
+        botonEquipoModificar.setEnabled(false);
         activarCamposEquipos();
     }//GEN-LAST:event_botonEquipoInsertarActionPerformed
 
@@ -618,26 +650,83 @@ public class VentanaGUI extends javax.swing.JFrame {
     private void jPanelJugadoresComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanelJugadoresComponentShown
         Query q = sesionCreada.createQuery("from Jugadores");
         List<Jugadores> listaJugadores = q.list();
-        Iterator iteradorEquipos = listaJugadores.iterator();
+        Iterator iteradorJugadores = listaJugadores.iterator();
         DefaultTableModel modeloTabla = (DefaultTableModel) jTableJugadores.getModel();
         modeloTabla.setRowCount(listaJugadores.size());
         System.out.println(modeloTabla.getRowCount());
         int i = 0;
-        while (iteradorEquipos.hasNext())
+        while (iteradorJugadores.hasNext())
         {
-            Jugadores jugador = (Jugadores) iteradorEquipos.next();
+            Jugadores jugador = (Jugadores) iteradorJugadores.next();
             modeloTabla.setValueAt(jugador.getCodigo(),i,0);
             modeloTabla.setValueAt(jugador.getNombre(), i, 1);
             modeloTabla.setValueAt(jugador.getProcedencia(), i, 2);
             modeloTabla.setValueAt(jugador.getPosicion(), i, 3);
             i++;
         }
+        //Aquí hacemos el combobox para cada los equipos introducidos
         jTableJugadores.setModel(modeloTabla);
+        Query qequipos = sesionCreada.createQuery("from Equipos");
+        List<Equipos> listaequipos = qequipos.list();
+        Iterator iteradorequipos = listaequipos.iterator();
+        DefaultComboBoxModel combobox = (DefaultComboBoxModel)jComboBoxEquipo.getModel();
+        while (iteradorequipos.hasNext())
+        {
+            Equipos equipo = (Equipos) iteradorequipos.next();
+            combobox.addElement(equipo.getNombre());
+        }
+        jComboBoxEquipo.setModel(combobox);
+        
     }//GEN-LAST:event_jPanelJugadoresComponentShown
 
     private void botonEquipoEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEquipoEliminarActionPerformed
         opcion = 2;
+        botonEquipoInsertar.setEnabled(false);
+        botonEquipoModificar.setEnabled(false);
     }//GEN-LAST:event_botonEquipoEliminarActionPerformed
+
+    private void botonEquipoModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEquipoModificarActionPerformed
+        opcion = 3;
+        botonEquipoInsertar.setEnabled(false);
+        botonEquipoEliminar.setEnabled(false);
+        equiposNombre.setEnabled(false);
+        equiposCiudad.setEditable(true);
+    }//GEN-LAST:event_botonEquipoModificarActionPerformed
+
+    private void jTableJugadoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableJugadoresMouseClicked
+       
+        Query q = sesionCreada.createQuery("from Jugadores as e where e.nombre = :nombreJugador");
+        DefaultTableModel modeloTabla = (DefaultTableModel) tablaEquiposListadoEquipos.getModel();
+        int filaSeleccionada = tablaEquiposListadoEquipos.getSelectedRow();
+        String nombreJugador = (String) modeloTabla.getValueAt(filaSeleccionada,0);
+        q.setParameter("nombreJugador", nombreJugador);
+        Jugadores jugador = (Jugadores) q.uniqueResult();
+        jTextFieldID.setText(Integer.toString(jugador.getCodigo()));
+        jTextFieldNombre.setText(jugador.getNombre());
+        jTextFieldUniversidad.setText(jugador.getProcedencia());
+        jSpinnerAltura.setValue(jugador.getAltura());
+        jSpinnerPeso.setValue(jugador.getPeso());
+       
+        
+        
+        
+        
+        /*equiposNombre.setText(jugador.getNombre());
+        equiposCiudad.setText(jugador.getCiudad());
+        equiposConferencia.setSelectedItem(equipo.getConferencia());
+        if (equipo.getConferencia().equals("Este"))
+        {
+            equiposDivisionCombo.setModel(new DefaultComboBoxModel<>(divisionEste));
+            equiposDivisionCombo.setSelectedItem(equipo.getDivision());
+        }
+        else
+        {
+            equiposDivisionCombo.setModel(new DefaultComboBoxModel<>(divisionOeste));
+            equiposDivisionCombo.setSelectedItem(equipo.getDivision());
+        }*/
+        
+        
+    }//GEN-LAST:event_jTableJugadoresMouseClicked
 
     public static void main(String args[]) {
         try {
@@ -688,8 +777,8 @@ public class VentanaGUI extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<String> jComboBoxEquipo;
+    private javax.swing.JComboBox<String> jComboBoxPosicion;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -701,12 +790,12 @@ public class VentanaGUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelJugadores;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JSpinner jSpinner2;
+    private javax.swing.JSpinner jSpinnerAltura;
+    private javax.swing.JSpinner jSpinnerPeso;
     private javax.swing.JTable jTableJugadores;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextFieldID;
+    private javax.swing.JTextField jTextFieldNombre;
+    private javax.swing.JTextField jTextFieldUniversidad;
     private javax.swing.JPanel panelEquiposBotones;
     private javax.swing.JPanel panelEquiposDerecho;
     private javax.swing.JPanel panelEquiposInformacion;
@@ -733,6 +822,11 @@ public class VentanaGUI extends javax.swing.JFrame {
         equiposNombre.setEditable(false);
         equiposConferencia.setEditable(false);
         equiposDivisionCombo.setEditable(false);
+    }
+    private void habilitarbotonesequipos(){
+        botonEquipoEliminar.setEnabled(true);
+        botonEquipoInsertar.setEnabled(true);
+        botonEquipoModificar.setEnabled(true);
     }
     
     private void activarCamposEquipos()
