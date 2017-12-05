@@ -58,9 +58,9 @@ public class VentanaGUI extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableJugadores = new javax.swing.JTable();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        jButtonInsertarJugadores = new javax.swing.JButton();
+        jButtonModificarJugadores = new javax.swing.JButton();
+        jButtonBorrarJugadores = new javax.swing.JButton();
         Derecho = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jTextFieldID = new javax.swing.JTextField();
@@ -73,11 +73,11 @@ public class VentanaGUI extends javax.swing.JFrame {
         jSpinnerAltura = new javax.swing.JSpinner();
         jSpinnerPeso = new javax.swing.JSpinner();
         jLabel11 = new javax.swing.JLabel();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
         jComboBoxPosicion = new javax.swing.JComboBox<>();
         jLabel12 = new javax.swing.JLabel();
         jComboBoxEquipo = new javax.swing.JComboBox<>();
+        botonJugadoresAceptar = new javax.swing.JButton();
+        botonJugadoresCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -354,11 +354,16 @@ public class VentanaGUI extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(jTableJugadores);
 
-        jButton2.setText("Insertar");
+        jButtonInsertarJugadores.setText("Insertar");
+        jButtonInsertarJugadores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonInsertarJugadoresActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Modificar");
+        jButtonModificarJugadores.setText("Modificar");
 
-        jButton4.setText("Borrar");
+        jButtonBorrarJugadores.setText("Borrar");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -370,11 +375,11 @@ public class VentanaGUI extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(148, 148, 148)
-                .addComponent(jButton2)
+                .addComponent(jButtonInsertarJugadores)
                 .addGap(18, 18, 18)
-                .addComponent(jButton3)
+                .addComponent(jButtonModificarJugadores)
                 .addGap(18, 18, 18)
-                .addComponent(jButton4)
+                .addComponent(jButtonBorrarJugadores)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -384,10 +389,10 @@ public class VentanaGUI extends javax.swing.JFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButtonInsertarJugadores)
+                    .addComponent(jButtonModificarJugadores)
+                    .addComponent(jButtonBorrarJugadores))
+                .addContainerGap(245, Short.MAX_VALUE))
         );
 
         Derecho.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
@@ -410,13 +415,23 @@ public class VentanaGUI extends javax.swing.JFrame {
 
         jLabel11.setText("Posicion");
 
-        jButton5.setText("Aceptar");
-
-        jButton6.setText("Cancelar");
-
         jComboBoxPosicion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Base", "Escolta", "Alero", "Ala", "Pivot", " " }));
 
         jLabel12.setText("Equipo");
+
+        botonJugadoresAceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/graficos/checked.png"))); // NOI18N
+        botonJugadoresAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonJugadoresAceptarActionPerformed(evt);
+            }
+        });
+
+        botonJugadoresCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/gestionbaloncesto/cancel.png"))); // NOI18N
+        botonJugadoresCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonJugadoresCancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout DerechoLayout = new javax.swing.GroupLayout(Derecho);
         Derecho.setLayout(DerechoLayout);
@@ -424,12 +439,6 @@ public class VentanaGUI extends javax.swing.JFrame {
             DerechoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(DerechoLayout.createSequentialGroup()
                 .addGroup(DerechoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(DerechoLayout.createSequentialGroup()
-                        .addGap(45, 45, 45)
-                        .addComponent(jButton5)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton6)
-                        .addGap(0, 15, Short.MAX_VALUE))
                     .addGroup(DerechoLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(DerechoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -443,12 +452,18 @@ public class VentanaGUI extends javax.swing.JFrame {
                         .addGap(23, 23, 23)
                         .addGroup(DerechoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jComboBoxEquipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextFieldID)
+                            .addComponent(jTextFieldID, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
                             .addComponent(jTextFieldNombre)
                             .addComponent(jTextFieldUniversidad)
                             .addComponent(jSpinnerAltura)
                             .addComponent(jSpinnerPeso)
-                            .addComponent(jComboBoxPosicion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(jComboBoxPosicion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(DerechoLayout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(botonJugadoresAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(botonJugadoresCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 34, 34)))
                 .addContainerGap())
         );
         DerechoLayout.setVerticalGroup(
@@ -483,10 +498,10 @@ public class VentanaGUI extends javax.swing.JFrame {
                     .addComponent(jLabel12)
                     .addComponent(jComboBoxEquipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(41, 41, 41)
-                .addGroup(DerechoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton5)
-                    .addComponent(jButton6))
-                .addContainerGap(112, Short.MAX_VALUE))
+                .addGroup(DerechoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(botonJugadoresAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botonJugadoresCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanelJugadoresLayout = new javax.swing.GroupLayout(jPanelJugadores);
@@ -553,12 +568,11 @@ public class VentanaGUI extends javax.swing.JFrame {
                 transaccion = sesionCreada.beginTransaction();
                 sesionCreada.delete(equipo);//update para modifica  //delete pa borrar
                 transaccion.commit();
-                pestanaEquiposComponentShown(new ComponentEvent(this, 0));
+                pestanaEquiposComponentShown(new ComponentEvent(this, 0));//resfresco la pestañ
                 habilitarbotonesequipos();
                 break;
                 
             case 3://Modificar
-        
                 equipo = (Equipos)sesionCreada.load(Equipos.class, (String)equiposNombre.getText());
                 transaccion = sesionCreada.beginTransaction();
                 
@@ -568,13 +582,14 @@ public class VentanaGUI extends javax.swing.JFrame {
                 equipo.setDivision(equiposDivisionCombo.getSelectedItem().toString());
                 sesionCreada.update(equipo);//update para modificar
                 transaccion.commit();
-                pestanaEquiposComponentShown(new ComponentEvent(this, 0));
+                pestanaEquiposComponentShown(new ComponentEvent(this, 0));//resfresco la pestañ
                 habilitarbotonesequipos();
                 break;
         }
     }//GEN-LAST:event_botonEquiposAceptarActionPerformed
 
     private void botonEquiposCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEquiposCancelarActionPerformed
+        
         pestanaEquiposComponentShown(new ComponentEvent(this, 0));
         desactivarCamposEquipos();
         habilitarbotonesequipos();
@@ -588,7 +603,7 @@ public class VentanaGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_botonEquipoInsertarActionPerformed
 
     private void equiposConferenciaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_equiposConferenciaItemStateChanged
-        // TODO add your handling code here:
+
        switch(equiposConferencia.getSelectedItem().toString())
        {
            case "Este": 
@@ -653,7 +668,6 @@ public class VentanaGUI extends javax.swing.JFrame {
         Iterator iteradorJugadores = listaJugadores.iterator();
         DefaultTableModel modeloTabla = (DefaultTableModel) jTableJugadores.getModel();
         modeloTabla.setRowCount(listaJugadores.size());
-        System.out.println(modeloTabla.getRowCount());
         int i = 0;
         while (iteradorJugadores.hasNext())
         {
@@ -664,7 +678,6 @@ public class VentanaGUI extends javax.swing.JFrame {
             modeloTabla.setValueAt(jugador.getPosicion(), i, 3);
             i++;
         }
-        //Aquí hacemos el combobox para cada los equipos introducidos
         jTableJugadores.setModel(modeloTabla);
         Query qequipos = sesionCreada.createQuery("from Equipos");
         List<Equipos> listaequipos = qequipos.list();
@@ -676,6 +689,7 @@ public class VentanaGUI extends javax.swing.JFrame {
             combobox.addElement(equipo.getNombre());
         }
         jComboBoxEquipo.setModel(combobox);
+        jugadoresDefecto();
         
     }//GEN-LAST:event_jPanelJugadoresComponentShown
 
@@ -695,38 +709,55 @@ public class VentanaGUI extends javax.swing.JFrame {
 
     private void jTableJugadoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableJugadoresMouseClicked
        
-        Query q = sesionCreada.createQuery("from Jugadores as e where e.nombre = :nombreJugador");
-        DefaultTableModel modeloTabla = (DefaultTableModel) tablaEquiposListadoEquipos.getModel();
-        int filaSeleccionada = tablaEquiposListadoEquipos.getSelectedRow();
-        String nombreJugador = (String) modeloTabla.getValueAt(filaSeleccionada,0);
-        q.setParameter("nombreJugador", nombreJugador);
+        Query q = sesionCreada.createQuery("from Jugadores as e where e.codigo = :codigoJugador");
+        DefaultTableModel modeloTabla = (DefaultTableModel) jTableJugadores.getModel();
+        int filaSeleccionada = jTableJugadores.getSelectedRow();
+        int codigoJugador = (int) modeloTabla.getValueAt(filaSeleccionada,0);
+        q.setParameter("codigoJugador", codigoJugador);
         Jugadores jugador = (Jugadores) q.uniqueResult();
         jTextFieldID.setText(Integer.toString(jugador.getCodigo()));
         jTextFieldNombre.setText(jugador.getNombre());
         jTextFieldUniversidad.setText(jugador.getProcedencia());
         jSpinnerAltura.setValue(jugador.getAltura());
         jSpinnerPeso.setValue(jugador.getPeso());
-       
-        
-        
-        
-        
-        /*equiposNombre.setText(jugador.getNombre());
-        equiposCiudad.setText(jugador.getCiudad());
-        equiposConferencia.setSelectedItem(equipo.getConferencia());
-        if (equipo.getConferencia().equals("Este"))
-        {
-            equiposDivisionCombo.setModel(new DefaultComboBoxModel<>(divisionEste));
-            equiposDivisionCombo.setSelectedItem(equipo.getDivision());
-        }
-        else
-        {
-            equiposDivisionCombo.setModel(new DefaultComboBoxModel<>(divisionOeste));
-            equiposDivisionCombo.setSelectedItem(equipo.getDivision());
-        }*/
-        
-        
+        jComboBoxEquipo.setSelectedItem(jugador.getEquipos().getNombre());
+        //TODO: METER LA POSI Y TO ESO
     }//GEN-LAST:event_jTableJugadoresMouseClicked
+
+    private void botonJugadoresAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonJugadoresAceptarActionPerformed
+       
+        Jugadores jugador = null;
+        Transaction transaccion = null;
+        Equipos equipo = null;
+        switch(opcion){
+        
+            case 1: //insertar
+                equipo = (Equipos)sesionCreada.load(Equipos.class, jComboBoxEquipo.getSelectedItem().toString());
+                
+                
+                jugador = new Jugadores(Integer.parseInt(jTextFieldID.getText()),equipo, jTextFieldNombre.getText(), jTextFieldUniversidad.getText(), Float.parseFloat(jSpinnerAltura.getValue().toString()),Integer.parseInt(jSpinnerPeso.getValue().toString()),jComboBoxPosicion.getSelectedItem().toString(), null);
+                transaccion = sesionCreada.beginTransaction();
+                sesionCreada.save(jugador);//save para nuevo
+                transaccion.commit();
+                jPanelJugadoresComponentShown(new ComponentEvent(this, 0));//resfresco la pestaña
+                
+                
+                break;
+            
+        }
+    }//GEN-LAST:event_botonJugadoresAceptarActionPerformed
+
+    private void botonJugadoresCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonJugadoresCancelarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botonJugadoresCancelarActionPerformed
+
+    private void jButtonInsertarJugadoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInsertarJugadoresActionPerformed
+        opcion=1;
+        jugadoresDefecto();
+        jButtonModificarJugadores.setEnabled(false);
+        jButtonBorrarJugadores.setEnabled(false);
+        
+    }//GEN-LAST:event_jButtonInsertarJugadoresActionPerformed
 
     public static void main(String args[]) {
         try {
@@ -763,6 +794,8 @@ public class VentanaGUI extends javax.swing.JFrame {
     private javax.swing.JButton botonEquipoModificar;
     private javax.swing.JButton botonEquiposAceptar;
     private javax.swing.JButton botonEquiposCancelar;
+    private javax.swing.JButton botonJugadoresAceptar;
+    private javax.swing.JButton botonJugadoresCancelar;
     private javax.swing.JTextField equiposCiudad;
     private javax.swing.JComboBox<String> equiposConferencia;
     private javax.swing.JComboBox<String> equiposDivisionCombo;
@@ -772,11 +805,9 @@ public class VentanaGUI extends javax.swing.JFrame {
     private javax.swing.JLabel etiquetaEquiposDivision;
     private javax.swing.JLabel etiquetaEquiposNombre;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButtonBorrarJugadores;
+    private javax.swing.JButton jButtonInsertarJugadores;
+    private javax.swing.JButton jButtonModificarJugadores;
     private javax.swing.JComboBox<String> jComboBoxEquipo;
     private javax.swing.JComboBox<String> jComboBoxPosicion;
     private javax.swing.JLabel jLabel10;
@@ -844,5 +875,10 @@ public class VentanaGUI extends javax.swing.JFrame {
         equiposNombre.setText("");
         equiposConferencia.setSelectedIndex(0);
         equiposDivisionCombo.setModel(new DefaultComboBoxModel(divisionEste));
+    }
+    private void jugadoresDefecto(){
+        jTextFieldID.setText("");
+        jTextFieldNombre.setText("");
+        jTextFieldUniversidad.setText("");
     }
 }
