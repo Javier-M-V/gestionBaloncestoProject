@@ -362,8 +362,18 @@ public class VentanaGUI extends javax.swing.JFrame {
         });
 
         jButtonModificarJugadores.setText("Modificar");
+        jButtonModificarJugadores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonModificarJugadoresActionPerformed(evt);
+            }
+        });
 
         jButtonBorrarJugadores.setText("Borrar");
+        jButtonBorrarJugadores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBorrarJugadoresActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -676,6 +686,7 @@ public class VentanaGUI extends javax.swing.JFrame {
             modeloTabla.setValueAt(jugador.getNombre(), i, 1);
             modeloTabla.setValueAt(jugador.getProcedencia(), i, 2);
             modeloTabla.setValueAt(jugador.getPosicion(), i, 3);
+            modeloTabla.setValueAt(jugador.getEquipos().getNombre(), i, 4);
             i++;
         }
         jTableJugadores.setModel(modeloTabla);
@@ -730,25 +741,65 @@ public class VentanaGUI extends javax.swing.JFrame {
         Transaction transaccion = null;
         Equipos equipo = null;
         switch(opcion){
+            case 0:
+                break;
         
             case 1: //insertar
                 equipo = (Equipos)sesionCreada.load(Equipos.class, jComboBoxEquipo.getSelectedItem().toString());
-                
-                
                 jugador = new Jugadores(Integer.parseInt(jTextFieldID.getText()),equipo, jTextFieldNombre.getText(), jTextFieldUniversidad.getText(), Float.parseFloat(jSpinnerAltura.getValue().toString()),Integer.parseInt(jSpinnerPeso.getValue().toString()),jComboBoxPosicion.getSelectedItem().toString(), null);
                 transaccion = sesionCreada.beginTransaction();
                 sesionCreada.save(jugador);//save para nuevo
+                equipo.getJugadoreses().add(jugador);
+                sesionCreada.update(equipo);
                 transaccion.commit();
                 jPanelJugadoresComponentShown(new ComponentEvent(this, 0));//resfresco la pestaña
+                habilitarbotonesJugadores();        
+                break;               
                 
+            case 2://borrar
                 
+                equipo = (Equipos)sesionCreada.load(Equipos.class, (String)equiposNombre.getText());
+                transaccion = sesionCreada.beginTransaction();
+                jugador = (Jugadores) sesionCreada.load(Jugadores.class, Integer.parseInt(jTextFieldID.getText()));
+                sesionCreada.delete(jugador);//update para modifica  //delete pa borrar
+                equipo.getJugadoreses().remove(jugador);
+                sesionCreada.update(equipo);
+                transaccion.commit();
+                jPanelJugadoresComponentShown(new ComponentEvent(this, 0));//resfresco la pestañ
+                habilitarbotonesJugadores();
+ 
                 break;
-            
+                
+            case 3://modificar
+                
+                transaccion = sesionCreada.beginTransaction();
+                jugador = (Jugadores) sesionCreada.load(Jugadores.class, Integer.parseInt(jTextFieldID.getText()));
+                equipo = (Equipos)sesionCreada.load((Equipos.class), jugador.getEquipos().getNombre());
+                equipo.getJugadoreses().remove(jugador);
+                sesionCreada.update(equipo);
+                transaccion.commit();
+                jugador.setCodigo(Integer.parseInt(jTextFieldID.getText()));
+                jugador.setPeso(Integer.parseInt(jSpinnerPeso.getValue().toString()));
+                jugador.setAltura(Float.parseFloat(jSpinnerAltura.getValue().toString()));
+                jugador.setProcedencia(jTextFieldUniversidad.getText());
+                jugador.setNombre(jTextFieldNombre.getText());
+                equipo = (Equipos)sesionCreada.load((Equipos.class),jComboBoxEquipo.getSelectedItem().toString());
+                equipo.getJugadoreses().add(jugador);
+                jugador.setEquipos(equipo);
+                transaccion = sesionCreada.beginTransaction();
+                sesionCreada.update(equipo);
+                sesionCreada.update(jugador);
+                transaccion.commit();
+                jPanelJugadoresComponentShown(new ComponentEvent(this, 0));//resfresco la pestañ
+                habilitarbotonesequipos();
+                break;  
         }
     }//GEN-LAST:event_botonJugadoresAceptarActionPerformed
 
     private void botonJugadoresCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonJugadoresCancelarActionPerformed
-        // TODO add your handling code here:
+       habilitarbotonesJugadores();
+       opcion = 0;
+       
     }//GEN-LAST:event_botonJugadoresCancelarActionPerformed
 
     private void jButtonInsertarJugadoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInsertarJugadoresActionPerformed
@@ -758,6 +809,18 @@ public class VentanaGUI extends javax.swing.JFrame {
         jButtonBorrarJugadores.setEnabled(false);
         
     }//GEN-LAST:event_jButtonInsertarJugadoresActionPerformed
+
+    private void jButtonBorrarJugadoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBorrarJugadoresActionPerformed
+        opcion = 2;
+        jButtonModificarJugadores.setEnabled(false);
+        jButtonInsertarJugadores.setEnabled(false);
+    }//GEN-LAST:event_jButtonBorrarJugadoresActionPerformed
+
+    private void jButtonModificarJugadoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarJugadoresActionPerformed
+        opcion = 3; 
+        jButtonInsertarJugadores.setEnabled(false);
+        jButtonBorrarJugadores.setEnabled(false);
+    }//GEN-LAST:event_jButtonModificarJugadoresActionPerformed
 
     public static void main(String args[]) {
         try {
@@ -858,6 +921,11 @@ public class VentanaGUI extends javax.swing.JFrame {
         botonEquipoEliminar.setEnabled(true);
         botonEquipoInsertar.setEnabled(true);
         botonEquipoModificar.setEnabled(true);
+    }
+    private void habilitarbotonesJugadores(){
+        jButtonInsertarJugadores.setEnabled(true);
+        jButtonBorrarJugadores.setEnabled(true);
+        jButtonModificarJugadores.setEnabled(true);
     }
     
     private void activarCamposEquipos()
