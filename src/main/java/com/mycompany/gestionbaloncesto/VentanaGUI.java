@@ -80,6 +80,8 @@ public class VentanaGUI extends javax.swing.JFrame {
         botonJugadoresAceptar = new javax.swing.JButton();
         botonJugadoresCancelar = new javax.swing.JButton();
         jPanelEstadisticasEquipos = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTextAreaEstadisticasEquipo = new javax.swing.JTextArea();
         jPanelEstadisticasJugadores = new javax.swing.JPanel();
         jButtonbuscarJugadorEstadisticas = new javax.swing.JButton();
         jTextFieldIDBuscar = new javax.swing.JTextField();
@@ -545,15 +547,31 @@ public class VentanaGUI extends javax.swing.JFrame {
 
         panelPestanyaPrincipal.addTab("Jugadores", jPanelJugadores);
 
+        jPanelEstadisticasEquipos.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                jPanelEstadisticasEquiposComponentShown(evt);
+            }
+        });
+
+        jTextAreaEstadisticasEquipo.setColumns(20);
+        jTextAreaEstadisticasEquipo.setRows(5);
+        jScrollPane4.setViewportView(jTextAreaEstadisticasEquipo);
+
         javax.swing.GroupLayout jPanelEstadisticasEquiposLayout = new javax.swing.GroupLayout(jPanelEstadisticasEquipos);
         jPanelEstadisticasEquipos.setLayout(jPanelEstadisticasEquiposLayout);
         jPanelEstadisticasEquiposLayout.setHorizontalGroup(
             jPanelEstadisticasEquiposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 836, Short.MAX_VALUE)
+            .addGroup(jPanelEstadisticasEquiposLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 824, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanelEstadisticasEquiposLayout.setVerticalGroup(
             jPanelEstadisticasEquiposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 487, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelEstadisticasEquiposLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 475, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         panelPestanyaPrincipal.addTab("Estadisticas de Equipos", jPanelEstadisticasEquipos);
@@ -913,6 +931,13 @@ public class VentanaGUI extends javax.swing.JFrame {
      
     }//GEN-LAST:event_jButtonbuscarJugadorEstadisticasActionPerformed
 
+    private void jPanelEstadisticasEquiposComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanelEstadisticasEquiposComponentShown
+        Query q = sesionCreada.createQuery("from Equipos");
+        List<Equipos> lista = q.list();
+        //numero de equipos = lista.size();
+        jTextAreaEstadisticasEquipo.setText("Número de equipos"+lista.size());
+    }//GEN-LAST:event_jPanelEstadisticasEquiposComponentShown
+
     public static void main(String args[]) {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -981,9 +1006,11 @@ public class VentanaGUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSpinner jSpinnerAltura;
     private javax.swing.JSpinner jSpinnerPeso;
     private javax.swing.JTable jTableJugadores;
+    private javax.swing.JTextArea jTextAreaEstadisticasEquipo;
     private javax.swing.JTextArea jTextAreaEstadsticas;
     private javax.swing.JTextField jTextFieldID;
     private javax.swing.JTextField jTextFieldIDBuscar;
