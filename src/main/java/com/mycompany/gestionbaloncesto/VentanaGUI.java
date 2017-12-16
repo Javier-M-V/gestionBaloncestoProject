@@ -356,7 +356,7 @@ public class VentanaGUI extends javax.swing.JFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5"
+                "Id", "Nombre", "Procedencia", "Posición", "Equipo"
             }
         ));
         jTableJugadores.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -774,6 +774,7 @@ public class VentanaGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanelEquiposComponentShown
 
     private void jPanelJugadoresComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanelJugadoresComponentShown
+        jComboBoxEquipo.removeAllItems();
         Query q = nuevaSession.createQuery("from Jugadores");
         List<Jugadores> listaJugadores = q.list();
         Iterator iteradorJugadores = listaJugadores.iterator();
@@ -833,7 +834,6 @@ public class VentanaGUI extends javax.swing.JFrame {
         jSpinnerAltura.setValue(jugador.getAltura());
         jSpinnerPeso.setValue(jugador.getPeso());
         jComboBoxEquipo.setSelectedItem(jugador.getEquipos().getNombre());
-        //TODO: METER LA POSI Y TO ESO
     }//GEN-LAST:event_jTableJugadoresMouseClicked
 
     private void botonJugadoresAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonJugadoresAceptarActionPerformed
