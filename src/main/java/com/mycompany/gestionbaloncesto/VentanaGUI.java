@@ -25,8 +25,8 @@ public class VentanaGUI extends javax.swing.JFrame {
 
     public VentanaGUI() {
         initComponents();
-        sesionFactoria=NewHibernateUtil.getSessionFactory();
-        sesionCreada = sesionFactoria.openSession(); 
+        sesionFactoria = NewHibernateUtil.getSessionFactory();
+        nuevaSession = sesionFactoria.openSession(); 
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -82,6 +82,8 @@ public class VentanaGUI extends javax.swing.JFrame {
         jPanelEstadisticasEquipos = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTextAreaEstadisticasEquipo = new javax.swing.JTextArea();
+        jTextFieldNumequipos = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
         jPanelEstadisticasJugadores = new javax.swing.JPanel();
         jButtonbuscarJugadorEstadisticas = new javax.swing.JButton();
         jTextFieldIDBuscar = new javax.swing.JTextField();
@@ -557,20 +559,38 @@ public class VentanaGUI extends javax.swing.JFrame {
         jTextAreaEstadisticasEquipo.setRows(5);
         jScrollPane4.setViewportView(jTextAreaEstadisticasEquipo);
 
+        jTextFieldNumequipos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldNumequiposActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Número de equipos");
+
         javax.swing.GroupLayout jPanelEstadisticasEquiposLayout = new javax.swing.GroupLayout(jPanelEstadisticasEquipos);
         jPanelEstadisticasEquipos.setLayout(jPanelEstadisticasEquiposLayout);
         jPanelEstadisticasEquiposLayout.setHorizontalGroup(
             jPanelEstadisticasEquiposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelEstadisticasEquiposLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 824, Short.MAX_VALUE)
+                .addGroup(jPanelEstadisticasEquiposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 824, Short.MAX_VALUE)
+                    .addGroup(jPanelEstadisticasEquiposLayout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(28, 28, 28)
+                        .addComponent(jTextFieldNumequipos, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanelEstadisticasEquiposLayout.setVerticalGroup(
             jPanelEstadisticasEquiposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelEstadisticasEquiposLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 475, Short.MAX_VALUE)
+                .addContainerGap(15, Short.MAX_VALUE)
+                .addGroup(jPanelEstadisticasEquiposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jTextFieldNumequipos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -646,8 +666,8 @@ public class VentanaGUI extends javax.swing.JFrame {
                 tablaEquiposListadoEquipos.clearSelection();
                 tablaEquiposListadoEquipos.setEnabled(false);
                 equipo = new Equipos(equiposNombre.getText(), equiposCiudad.getText(), equiposConferencia.getSelectedItem().toString(), equiposDivisionCombo.getSelectedItem().toString(), null, null, null);
-                transaccion = sesionCreada.beginTransaction();
-                sesionCreada.save(equipo);//save para nuevo
+                transaccion = nuevaSession.beginTransaction();
+                nuevaSession.save(equipo);//save para nuevo
                 transaccion.commit();
                 jPanelEquiposComponentShown(new ComponentEvent(this, 0));//resfresco la pestaña
                 habilitarbotonesequipos();
@@ -655,23 +675,23 @@ public class VentanaGUI extends javax.swing.JFrame {
                 break;
                
             case 2://borrar
-                equipo = (Equipos)sesionCreada.load(Equipos.class, (String)equiposNombre.getText());
-                transaccion = sesionCreada.beginTransaction();
-                sesionCreada.delete(equipo);//delete pa borrar
+                equipo = (Equipos)nuevaSession.load(Equipos.class, (String)equiposNombre.getText());
+                transaccion = nuevaSession.beginTransaction();
+                nuevaSession.delete(equipo);//delete pa borrar
                 transaccion.commit();
                 jPanelEquiposComponentShown(new ComponentEvent(this, 0));//resfresco la pestañ
                 habilitarbotonesequipos();
                 break;
                 
             case 3://Modificar
-                equipo = (Equipos)sesionCreada.load(Equipos.class, (String)equiposNombre.getText());
-                transaccion = sesionCreada.beginTransaction();
+                equipo = (Equipos)nuevaSession.load(Equipos.class, (String)equiposNombre.getText());
+                transaccion = nuevaSession.beginTransaction();
                 
                 equipo.setNombre(equiposNombre.getText());
                 equipo.setCiudad(equiposCiudad.getText());
                 equipo.setConferencia(equiposConferencia.getSelectedItem().toString());
                 equipo.setDivision(equiposDivisionCombo.getSelectedItem().toString());
-                sesionCreada.update(equipo);//update para modificar
+                nuevaSession.update(equipo);//update para modificar
                 transaccion.commit();
                 jPanelEquiposComponentShown(new ComponentEvent(this, 0));//resfresco la pestañ
                 habilitarbotonesequipos();
@@ -710,7 +730,7 @@ public class VentanaGUI extends javax.swing.JFrame {
 
     private void tablaEquiposListadoEquiposMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaEquiposListadoEquiposMouseClicked
         
-        Query q = sesionCreada.createQuery("from Equipos as e where e.nombre = :nombreEquipo");
+        Query q = nuevaSession.createQuery("from Equipos as e where e.nombre = :nombreEquipo");
         DefaultTableModel modeloTabla = (DefaultTableModel) tablaEquiposListadoEquipos.getModel();
         int filaSeleccionada = tablaEquiposListadoEquipos.getSelectedRow();
         String nombreEquipo = (String) modeloTabla.getValueAt(filaSeleccionada,0);
@@ -735,7 +755,7 @@ public class VentanaGUI extends javax.swing.JFrame {
         
         camposDefectoEquipos();
         desactivarCamposEquipos();
-        Query q = sesionCreada.createQuery("from Equipos");
+        Query q = nuevaSession.createQuery("from Equipos");
         List<Equipos> listaEquipos = q.list();
         Iterator iteradorEquipos = listaEquipos.iterator();
         DefaultTableModel modeloTabla = (DefaultTableModel) tablaEquiposListadoEquipos.getModel();
@@ -754,7 +774,7 @@ public class VentanaGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanelEquiposComponentShown
 
     private void jPanelJugadoresComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanelJugadoresComponentShown
-        Query q = sesionCreada.createQuery("from Jugadores");
+        Query q = nuevaSession.createQuery("from Jugadores");
         List<Jugadores> listaJugadores = q.list();
         Iterator iteradorJugadores = listaJugadores.iterator();
         DefaultTableModel modeloTabla = (DefaultTableModel) jTableJugadores.getModel();
@@ -771,7 +791,7 @@ public class VentanaGUI extends javax.swing.JFrame {
             i++;
         }
         jTableJugadores.setModel(modeloTabla);
-        Query qequipos = sesionCreada.createQuery("from Equipos");
+        Query qequipos = nuevaSession.createQuery("from Equipos");
         List<Equipos> listaequipos = qequipos.list();
         Iterator iteradorequipos = listaequipos.iterator();
         DefaultComboBoxModel combobox = (DefaultComboBoxModel)jComboBoxEquipo.getModel();
@@ -801,7 +821,7 @@ public class VentanaGUI extends javax.swing.JFrame {
 
     private void jTableJugadoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableJugadoresMouseClicked
        
-        Query q = sesionCreada.createQuery("from Jugadores as e where e.codigo = :codigoJugador");
+        Query q = nuevaSession.createQuery("from Jugadores as e where e.codigo = :codigoJugador");
         DefaultTableModel modeloTabla = (DefaultTableModel) jTableJugadores.getModel();
         int filaSeleccionada = jTableJugadores.getSelectedRow();
         int codigoJugador = (int) modeloTabla.getValueAt(filaSeleccionada,0);
@@ -826,12 +846,12 @@ public class VentanaGUI extends javax.swing.JFrame {
                 break;
         
             case 1: //insertar
-                equipo = (Equipos)sesionCreada.load(Equipos.class, jComboBoxEquipo.getSelectedItem().toString());
+                equipo = (Equipos)nuevaSession.load(Equipos.class, jComboBoxEquipo.getSelectedItem().toString());
                 jugador = new Jugadores(Integer.parseInt(jTextFieldID.getText()),equipo, jTextFieldNombre.getText(), jTextFieldUniversidad.getText(), Float.parseFloat(jSpinnerAltura.getValue().toString()),Integer.parseInt(jSpinnerPeso.getValue().toString()),jComboBoxPosicion.getSelectedItem().toString(), null);
-                transaccion = sesionCreada.beginTransaction();
-                sesionCreada.save(jugador);//save para nuevo
+                transaccion = nuevaSession.beginTransaction();
+                nuevaSession.save(jugador);//save para nuevo
                 equipo.getJugadoreses().add(jugador);
-                sesionCreada.update(equipo);
+                nuevaSession.update(equipo);
                 transaccion.commit();
                 jPanelJugadoresComponentShown(new ComponentEvent(this, 0));//resfresco la pestaña
                 habilitarbotonesJugadores();        
@@ -839,12 +859,12 @@ public class VentanaGUI extends javax.swing.JFrame {
                 
             case 2://borrar
                 
-                equipo = (Equipos)sesionCreada.load(Equipos.class, (String)equiposNombre.getText());
-                transaccion = sesionCreada.beginTransaction();
-                jugador = (Jugadores) sesionCreada.load(Jugadores.class, Integer.parseInt(jTextFieldID.getText()));
-                sesionCreada.delete(jugador);//update para modifica  //delete pa borrar
+                equipo = (Equipos)nuevaSession.load(Equipos.class, (String)equiposNombre.getText());
+                transaccion = nuevaSession.beginTransaction();
+                jugador = (Jugadores) nuevaSession.load(Jugadores.class, Integer.parseInt(jTextFieldID.getText()));
+                nuevaSession.delete(jugador);//update para modifica  //delete pa borrar
                 equipo.getJugadoreses().remove(jugador);
-                sesionCreada.update(equipo);
+                nuevaSession.update(equipo);
                 transaccion.commit();
                 jPanelJugadoresComponentShown(new ComponentEvent(this, 0));//resfresco la pestañ
                 habilitarbotonesJugadores();
@@ -853,23 +873,23 @@ public class VentanaGUI extends javax.swing.JFrame {
                 
             case 3://modificar
                 
-                transaccion = sesionCreada.beginTransaction();
-                jugador = (Jugadores) sesionCreada.load(Jugadores.class, Integer.parseInt(jTextFieldID.getText()));
-                equipo = (Equipos)sesionCreada.load((Equipos.class), jugador.getEquipos().getNombre());
+                transaccion = nuevaSession.beginTransaction();
+                jugador = (Jugadores) nuevaSession.load(Jugadores.class, Integer.parseInt(jTextFieldID.getText()));
+                equipo = (Equipos)nuevaSession.load((Equipos.class), jugador.getEquipos().getNombre());
                 equipo.getJugadoreses().remove(jugador);
-                sesionCreada.update(equipo);
+                nuevaSession.update(equipo);
                 transaccion.commit();
                 jugador.setCodigo(Integer.parseInt(jTextFieldID.getText()));
                 jugador.setPeso(Integer.parseInt(jSpinnerPeso.getValue().toString()));
                 jugador.setAltura(Float.parseFloat(jSpinnerAltura.getValue().toString()));
                 jugador.setProcedencia(jTextFieldUniversidad.getText());
                 jugador.setNombre(jTextFieldNombre.getText());
-                equipo = (Equipos)sesionCreada.load((Equipos.class),jComboBoxEquipo.getSelectedItem().toString());
+                equipo = (Equipos)nuevaSession.load((Equipos.class),jComboBoxEquipo.getSelectedItem().toString());
                 equipo.getJugadoreses().add(jugador);
                 jugador.setEquipos(equipo);
-                transaccion = sesionCreada.beginTransaction();
-                sesionCreada.update(equipo);
-                sesionCreada.update(jugador);
+                transaccion = nuevaSession.beginTransaction();
+                nuevaSession.update(equipo);
+                nuevaSession.update(jugador);
                 transaccion.commit();
                 jPanelJugadoresComponentShown(new ComponentEvent(this, 0));//resfresco la pestañ
                 habilitarbotonesequipos();
@@ -903,8 +923,10 @@ public class VentanaGUI extends javax.swing.JFrame {
         jButtonBorrarJugadores.setEnabled(false);
     }//GEN-LAST:event_jButtonModificarJugadoresActionPerformed
 
+    
+    //Búsqueda de jugadores por ID. Itera por el set de estadísicas, y busca el ID para encontrar la temporada
     private void jButtonbuscarJugadorEstadisticasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonbuscarJugadorEstadisticasActionPerformed
-        Query q = sesionCreada.createQuery("from Jugadores as e where e.codigo = :codigoJugador");
+        Query q = nuevaSession.createQuery("from Jugadores as e where e.codigo = :codigoJugador");
         String estadisticasS ="";
         int codigoJugador = Integer.parseInt(jTextFieldIDBuscar.getText());
         q.setParameter("codigoJugador", codigoJugador);
@@ -914,29 +936,60 @@ public class VentanaGUI extends javax.swing.JFrame {
             Set estadisticas = jugador.getEstadisticases();
             Iterator iteradorestas = estadisticas.iterator();
             while(iteradorestas.hasNext()){
-                 Estadisticas est = (Estadisticas)iteradorestas.next();
-                 EstadisticasId id =est.getId();
-                 estadisticasS += "Temporada: "+id.getTemporada()+"\n";
-                 estadisticasS += "Asistencias: "+est.getAsistenciasPorPartido().toString()+"\n";
-                 estadisticasS += "Puntos por partido: "+est.getPuntosPorPartido().toString()+"\n";
-                 estadisticasS +="Rebotes: "+est.getRebotesPorPartido().toString()+"\n";
-                 estadisticasS +="Tapones: "+est.getTaponesPorPartido().toString()+"\n";
+                estadisticasS+="Temporada\tAsistencias\tPuntos por partido\tRebotes\tTapones\n";    
+                Estadisticas est = (Estadisticas)iteradorestas.next();
+                EstadisticasId id = est.getId();
+                estadisticasS += id.getTemporada()+"\t";
+                estadisticasS += est.getAsistenciasPorPartido().toString()+"\t";
+                estadisticasS += est.getPuntosPorPartido().toString()+"\t\t";
+                estadisticasS += est.getRebotesPorPartido().toString()+"\t";
+                estadisticasS += est.getTaponesPorPartido().toString()+"\n";
+                estadisticasS+="===============================================================================\n"; 
             }
             jTextAreaEstadsticas.setText(estadisticasS);
         }catch(Exception e){
             jTextAreaEstadsticas.setText("Ese jugador no existe");
         }
-        
-        
-     
     }//GEN-LAST:event_jButtonbuscarJugadorEstadisticasActionPerformed
 
+    /*Muestra las estadísticas de los equipos, iterando por cada equipo, 
+    cada jugador y cada set de estadísticas para hacer la media*/
     private void jPanelEstadisticasEquiposComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanelEstadisticasEquiposComponentShown
-        Query q = sesionCreada.createQuery("from Equipos");
-        List<Equipos> lista = q.list();
-        //numero de equipos = lista.size();
-        jTextAreaEstadisticasEquipo.setText("Número de equipos"+lista.size());
+        Query q = nuevaSession.createQuery("from Equipos");
+        List<Equipos> listaEquipos = q.list();
+        //numero de equipos = listaEquipos.size();
+        jTextFieldNumequipos.setText(Integer.toString(listaEquipos.size()));
+        String textoSalida= "";
+        Iterator equipos = listaEquipos.iterator();
+        while(equipos.hasNext()){
+            float suma = 0;
+            int iteraciones =0;
+            Equipos equipo = (Equipos)equipos.next();
+            textoSalida+="Equipo: "+equipo.getNombre()+"\n";
+            textoSalida+="====================================================="+"\n";
+            Set<Jugadores> jugadores = equipo.getJugadoreses();
+            Iterator jugadoreses = jugadores.iterator();
+            while(jugadoreses.hasNext()){
+                Jugadores jugador = (Jugadores)jugadoreses.next();
+                textoSalida+=jugador.getCodigo()+"\t";
+                textoSalida+=jugador.getNombre()+"\t";
+                Set<Estadisticas> estadisticasjugador = jugador.getEstadisticases();
+                Iterator estadisticases = estadisticasjugador.iterator();
+                while(estadisticases.hasNext()){
+                    Estadisticas estadisticasAnyo=(Estadisticas)estadisticases.next();
+                    suma += estadisticasAnyo.getPuntosPorPartido();
+                    iteraciones++;
+                }
+                textoSalida+="Media de puntos: "+suma/iteraciones+"\n";
+                textoSalida+="====================================================="+"\n";
+            }
+        }
+        jTextAreaEstadisticasEquipo.setText(textoSalida);
     }//GEN-LAST:event_jPanelEstadisticasEquiposComponentShown
+
+    private void jTextFieldNumequiposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNumequiposActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldNumequiposActionPerformed
 
     public static void main(String args[]) {
         try {
@@ -990,6 +1043,7 @@ public class VentanaGUI extends javax.swing.JFrame {
     private javax.swing.JButton jButtonbuscarJugadorEstadisticas;
     private javax.swing.JComboBox<String> jComboBoxEquipo;
     private javax.swing.JComboBox<String> jComboBoxPosicion;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -1015,6 +1069,7 @@ public class VentanaGUI extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldID;
     private javax.swing.JTextField jTextFieldIDBuscar;
     private javax.swing.JTextField jTextFieldNombre;
+    private javax.swing.JTextField jTextFieldNumequipos;
     private javax.swing.JTextField jTextFieldUniversidad;
     private javax.swing.JPanel panelEquiposBotones;
     private javax.swing.JPanel panelEquiposDerecho;
@@ -1024,7 +1079,7 @@ public class VentanaGUI extends javax.swing.JFrame {
     private javax.swing.JTable tablaEquiposListadoEquipos;
     // End of variables declaration//GEN-END:variables
     private SessionFactory sesionFactoria = null;
-    private Session sesionCreada = null;
+    private Session nuevaSession = null;
     private int opcion = 0;
     private String[] divisionEste = {"Atlantico","Sureste","Central"};
     private String[] divisionOeste = {"NoroEste","Suroeste","Pacifico"};
